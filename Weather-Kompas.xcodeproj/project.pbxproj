@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E18DB1B3BC27558C807E844 /* Pods_Weather_Kompas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E095274BFCC7ABEFFE9DBB /* Pods_Weather_Kompas.framework */; };
 		B028D8C92786D8E8003915BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8C82786D8E8003915BC /* AppDelegate.swift */; };
 		B028D8CB2786D8E8003915BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8CA2786D8E8003915BC /* SceneDelegate.swift */; };
 		B028D8D32786D8E8003915BC /* Weather_Kompas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B028D8D12786D8E8003915BC /* Weather_Kompas.xcdatamodeld */; };
@@ -15,10 +16,14 @@
 		B028D8E62786DAD1003915BC /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8E52786DAD1003915BC /* WeatherViewController.swift */; };
 		B028D8E82786DAF4003915BC /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8E72786DAF4003915BC /* WeatherModel.swift */; };
 		B028D8EA2786DB04003915BC /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8E92786DB04003915BC /* WeatherViewModel.swift */; };
-		B028D8EC2786DB1B003915BC /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8EB2786DB1B003915BC /* Constant.swift */; };
+		B028D8EC2786DB1B003915BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8EB2786DB1B003915BC /* Constants.swift */; };
+		B028D8F02786DDCE003915BC /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8EF2786DDCE003915BC /* ItemComponent.swift */; };
+		B028D8F22786E032003915BC /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8F12786E032003915BC /* LabelComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		320FA338E9059C944EB9C0C2 /* Pods-Weather-Kompas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather-Kompas.release.xcconfig"; path = "Target Support Files/Pods-Weather-Kompas/Pods-Weather-Kompas.release.xcconfig"; sourceTree = "<group>"; };
+		98E095274BFCC7ABEFFE9DBB /* Pods_Weather_Kompas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather_Kompas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B028D8C52786D8E8003915BC /* Weather-Kompas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather-Kompas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B028D8C82786D8E8003915BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B028D8CA2786D8E8003915BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,7 +34,10 @@
 		B028D8E52786DAD1003915BC /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		B028D8E72786DAF4003915BC /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		B028D8E92786DB04003915BC /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
-		B028D8EB2786DB1B003915BC /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B028D8EB2786DB1B003915BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B028D8EF2786DDCE003915BC /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
+		B028D8F12786E032003915BC /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
+		E1AE0319569E8E7581ECF9DA /* Pods-Weather-Kompas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather-Kompas.debug.xcconfig"; path = "Target Support Files/Pods-Weather-Kompas/Pods-Weather-Kompas.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +45,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E18DB1B3BC27558C807E844 /* Pods_Weather_Kompas.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		244D36FE66124CD8060406CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				98E095274BFCC7ABEFFE9DBB /* Pods_Weather_Kompas.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B028D8BC2786D8E8003915BC = {
 			isa = PBXGroup;
 			children = (
 				B028D8C72786D8E8003915BC /* Weather-Kompas */,
 				B028D8C62786D8E8003915BC /* Products */,
+				E9EACBAC22A861260A60F092 /* Pods */,
+				244D36FE66124CD8060406CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,7 +105,8 @@
 		B028D8E02786DA60003915BC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B028D8EB2786DB1B003915BC /* Constant.swift */,
+				B028D8EE2786DDB0003915BC /* Component */,
+				B028D8EB2786DB1B003915BC /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -132,6 +152,25 @@
 			path = APIManager;
 			sourceTree = "<group>";
 		};
+		B028D8EE2786DDB0003915BC /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				B028D8EF2786DDCE003915BC /* ItemComponent.swift */,
+				B028D8F12786E032003915BC /* LabelComponent.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		E9EACBAC22A861260A60F092 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1AE0319569E8E7581ECF9DA /* Pods-Weather-Kompas.debug.xcconfig */,
+				320FA338E9059C944EB9C0C2 /* Pods-Weather-Kompas.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,9 +178,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B028D8DC2786D8EA003915BC /* Build configuration list for PBXNativeTarget "Weather-Kompas" */;
 			buildPhases = (
+				47EE025FED1E6565FA6133CC /* [CP] Check Pods Manifest.lock */,
 				B028D8C12786D8E8003915BC /* Sources */,
 				B028D8C22786D8E8003915BC /* Frameworks */,
 				B028D8C32786D8E8003915BC /* Resources */,
+				7168686EB3DB9488C44DDC16 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,14 +238,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		47EE025FED1E6565FA6133CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Weather-Kompas-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7168686EB3DB9488C44DDC16 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Weather-Kompas/Pods-Weather-Kompas-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Weather-Kompas/Pods-Weather-Kompas-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Weather-Kompas/Pods-Weather-Kompas-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B028D8C12786D8E8003915BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B028D8F02786DDCE003915BC /* ItemComponent.swift in Sources */,
 				B028D8E62786DAD1003915BC /* WeatherViewController.swift in Sources */,
+				B028D8F22786E032003915BC /* LabelComponent.swift in Sources */,
 				B028D8D32786D8E8003915BC /* Weather_Kompas.xcdatamodeld in Sources */,
-				B028D8EC2786DB1B003915BC /* Constant.swift in Sources */,
+				B028D8EC2786DB1B003915BC /* Constants.swift in Sources */,
 				B028D8EA2786DB04003915BC /* WeatherViewModel.swift in Sources */,
 				B028D8C92786D8E8003915BC /* AppDelegate.swift in Sources */,
 				B028D8E82786DAF4003915BC /* WeatherModel.swift in Sources */,
@@ -344,6 +429,7 @@
 		};
 		B028D8DD2786D8EA003915BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1AE0319569E8E7581ECF9DA /* Pods-Weather-Kompas.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -371,6 +457,7 @@
 		};
 		B028D8DE2786D8EA003915BC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 320FA338E9059C944EB9C0C2 /* Pods-Weather-Kompas.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
