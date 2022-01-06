@@ -9,23 +9,27 @@
 /* Begin PBXBuildFile section */
 		B028D8C92786D8E8003915BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8C82786D8E8003915BC /* AppDelegate.swift */; };
 		B028D8CB2786D8E8003915BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8CA2786D8E8003915BC /* SceneDelegate.swift */; };
-		B028D8CD2786D8E8003915BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8CC2786D8E8003915BC /* ViewController.swift */; };
-		B028D8D02786D8E8003915BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B028D8CE2786D8E8003915BC /* Main.storyboard */; };
 		B028D8D32786D8E8003915BC /* Weather_Kompas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B028D8D12786D8E8003915BC /* Weather_Kompas.xcdatamodeld */; };
 		B028D8D52786D8EA003915BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B028D8D42786D8EA003915BC /* Assets.xcassets */; };
 		B028D8D82786D8EA003915BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B028D8D62786D8EA003915BC /* LaunchScreen.storyboard */; };
+		B028D8E62786DAD1003915BC /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8E52786DAD1003915BC /* WeatherViewController.swift */; };
+		B028D8E82786DAF4003915BC /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8E72786DAF4003915BC /* WeatherModel.swift */; };
+		B028D8EA2786DB04003915BC /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8E92786DB04003915BC /* WeatherViewModel.swift */; };
+		B028D8EC2786DB1B003915BC /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8EB2786DB1B003915BC /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B028D8C52786D8E8003915BC /* Weather-Kompas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather-Kompas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B028D8C82786D8E8003915BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B028D8CA2786D8E8003915BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B028D8CC2786D8E8003915BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B028D8CF2786D8E8003915BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B028D8D22786D8E8003915BC /* Weather_Kompas.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weather_Kompas.xcdatamodel; sourceTree = "<group>"; };
 		B028D8D42786D8EA003915BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B028D8D72786D8EA003915BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B028D8D92786D8EA003915BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B028D8E52786DAD1003915BC /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		B028D8E72786DAF4003915BC /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		B028D8E92786DB04003915BC /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		B028D8EB2786DB1B003915BC /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +62,74 @@
 		B028D8C72786D8E8003915BC /* Weather-Kompas */ = {
 			isa = PBXGroup;
 			children = (
-				B028D8C82786D8E8003915BC /* AppDelegate.swift */,
-				B028D8CA2786D8E8003915BC /* SceneDelegate.swift */,
-				B028D8CC2786D8E8003915BC /* ViewController.swift */,
-				B028D8CE2786D8E8003915BC /* Main.storyboard */,
+				B028D8ED2786DB37003915BC /* APIManager */,
+				B028D8E12786DA89003915BC /* Weather */,
+				B028D8E02786DA60003915BC /* Utilities */,
+				B028D8DF2786DA58003915BC /* Delegate */,
 				B028D8D42786D8EA003915BC /* Assets.xcassets */,
 				B028D8D62786D8EA003915BC /* LaunchScreen.storyboard */,
 				B028D8D92786D8EA003915BC /* Info.plist */,
 				B028D8D12786D8E8003915BC /* Weather_Kompas.xcdatamodeld */,
 			);
 			path = "Weather-Kompas";
+			sourceTree = "<group>";
+		};
+		B028D8DF2786DA58003915BC /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				B028D8C82786D8E8003915BC /* AppDelegate.swift */,
+				B028D8CA2786D8E8003915BC /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		B028D8E02786DA60003915BC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B028D8EB2786DB1B003915BC /* Constant.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B028D8E12786DA89003915BC /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				B028D8E42786DAAD003915BC /* Model */,
+				B028D8E32786DA9F003915BC /* View */,
+				B028D8E22786DA96003915BC /* ViewModel */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		B028D8E22786DA96003915BC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B028D8E92786DB04003915BC /* WeatherViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B028D8E32786DA9F003915BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B028D8E52786DAD1003915BC /* WeatherViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B028D8E42786DAAD003915BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B028D8E72786DAF4003915BC /* WeatherModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B028D8ED2786DB37003915BC /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = APIManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +192,6 @@
 			files = (
 				B028D8D82786D8EA003915BC /* LaunchScreen.storyboard in Resources */,
 				B028D8D52786D8EA003915BC /* Assets.xcassets in Resources */,
-				B028D8D02786D8E8003915BC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,9 +202,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B028D8CD2786D8E8003915BC /* ViewController.swift in Sources */,
+				B028D8E62786DAD1003915BC /* WeatherViewController.swift in Sources */,
 				B028D8D32786D8E8003915BC /* Weather_Kompas.xcdatamodeld in Sources */,
+				B028D8EC2786DB1B003915BC /* Constant.swift in Sources */,
+				B028D8EA2786DB04003915BC /* WeatherViewModel.swift in Sources */,
 				B028D8C92786D8E8003915BC /* AppDelegate.swift in Sources */,
+				B028D8E82786DAF4003915BC /* WeatherModel.swift in Sources */,
 				B028D8CB2786D8E8003915BC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,14 +215,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B028D8CE2786D8E8003915BC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B028D8CF2786D8E8003915BC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B028D8D62786D8EA003915BC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -298,7 +354,6 @@
 				INFOPLIST_FILE = "Weather-Kompas/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,7 +365,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,7 +381,6 @@
 				INFOPLIST_FILE = "Weather-Kompas/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -338,7 +392,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
