@@ -19,6 +19,8 @@
 		B028D8EC2786DB1B003915BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8EB2786DB1B003915BC /* Constants.swift */; };
 		B028D8F02786DDCE003915BC /* ItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8EF2786DDCE003915BC /* ItemComponent.swift */; };
 		B028D8F22786E032003915BC /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8F12786E032003915BC /* LabelComponent.swift */; };
+		B028D8F4278703F3003915BC /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8F3278703F3003915BC /* APIManager.swift */; };
+		B028D8F62787109C003915BC /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8F52787109C003915BC /* ErrorModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		B028D8EB2786DB1B003915BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B028D8EF2786DDCE003915BC /* ItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemComponent.swift; sourceTree = "<group>"; };
 		B028D8F12786E032003915BC /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
+		B028D8F3278703F3003915BC /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		B028D8F52787109C003915BC /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		E1AE0319569E8E7581ECF9DA /* Pods-Weather-Kompas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather-Kompas.debug.xcconfig"; path = "Target Support Files/Pods-Weather-Kompas/Pods-Weather-Kompas.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				B028D8E72786DAF4003915BC /* WeatherModel.swift */,
+				B028D8F52787109C003915BC /* ErrorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 		B028D8ED2786DB37003915BC /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
+				B028D8F3278703F3003915BC /* APIManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -167,7 +173,6 @@
 				E1AE0319569E8E7581ECF9DA /* Pods-Weather-Kompas.debug.xcconfig */,
 				320FA338E9059C944EB9C0C2 /* Pods-Weather-Kompas.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -287,7 +292,9 @@
 			files = (
 				B028D8F02786DDCE003915BC /* ItemComponent.swift in Sources */,
 				B028D8E62786DAD1003915BC /* WeatherViewController.swift in Sources */,
+				B028D8F4278703F3003915BC /* APIManager.swift in Sources */,
 				B028D8F22786E032003915BC /* LabelComponent.swift in Sources */,
+				B028D8F62787109C003915BC /* ErrorModel.swift in Sources */,
 				B028D8D32786D8E8003915BC /* Weather_Kompas.xcdatamodeld in Sources */,
 				B028D8EC2786DB1B003915BC /* Constants.swift in Sources */,
 				B028D8EA2786DB04003915BC /* WeatherViewModel.swift in Sources */,

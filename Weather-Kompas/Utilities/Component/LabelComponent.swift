@@ -19,7 +19,7 @@ class LabelComponent: UILabel {
     var itemLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Label Items"
+        label.text = "---"
         label.numberOfLines = 0
         label.textColor = UIColor.white
         return label

@@ -62,7 +62,7 @@ class ItemComponent: UIView {
     var descLabelSatu: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Label Satu Label Satu Label Satu"
+        label.text = "--"
         label.numberOfLines = 1
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
@@ -104,7 +104,7 @@ class ItemComponent: UIView {
     var descLabelDua: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Label Satu Label Satu Label Satu"
+        label.text = "--"
         label.numberOfLines = 1
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
@@ -146,7 +146,7 @@ class ItemComponent: UIView {
     var descLabelTiga: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Label Satu Label Satu Label Satu"
+        label.text = "--"
         label.numberOfLines = 1
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)

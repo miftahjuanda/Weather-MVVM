@@ -12,7 +12,8 @@ class WeatherViewController: UIViewController {
     
     private var refresh: UIRefreshControl = {
         let refresh = UIRefreshControl()
-//        refresh.addTarget(self, action: #selector(refreshAction(sender:)), for: .valueChanged)
+        refresh.tintColor = .white
+        refresh.addTarget(self, action: #selector(refreshAction(sender:)), for: .valueChanged)
         return refresh
     }()
     
@@ -51,13 +52,16 @@ class WeatherViewController: UIViewController {
     private var minLabel = LabelComponent()
     private var maxLabel = LabelComponent()
     
-    
     private var itemWeatherTop = ItemComponent()
     private var itemWeatherBott = ItemComponent()
-
+    
+    private let weatherViewModel = WeatherViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        weatherViewModel.getDataWeather()
         
+        setDataView()
         setComponentView()
         setConstraintView()
     }
@@ -69,7 +73,7 @@ class WeatherViewController: UIViewController {
         gradientLayer.colors = [UIColor(named: "Color-1")?.cgColor, UIColor(named: "Color-2")?.cgColor]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
         
-        
+        weatherViewModel.getDataWeather(lat: "2.962340", lon: "99.065988")
     }
     
     private func setComponentView() {
@@ -77,35 +81,31 @@ class WeatherViewController: UIViewController {
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
+        scrollView.refreshControl = refresh
+        
         contentView.addSubview(cityLabel)
-        cityLabel.itemLabel.text = "Kota Batam"
         cityLabel.itemLabel.font = UIFont.systemFont(ofSize: 24)
         cityLabel.itemLabel.textAlignment = .center
         
         
         contentView.addSubview(updateLabel)
-        updateLabel.itemLabel.text = "Update at: ---------"
         updateLabel.itemLabel.font = UIFont.systemFont(ofSize: 14)
         updateLabel.itemLabel.textAlignment = .center
 
         contentView.addSubview(weatherLabel)
-        weatherLabel.itemLabel.text = "Haze"
         weatherLabel.itemLabel.font = UIFont.systemFont(ofSize: 16)
         weatherLabel.itemLabel.textAlignment = .center
 
         contentView.addSubview(celciusLabel)
-        celciusLabel.itemLabel.text = "27'' C "
         celciusLabel.itemLabel.font = UIFont.systemFont(ofSize: 54)
         celciusLabel.itemLabel.textAlignment = .center
 
         contentView.addSubview(horizontalStackView)
         horizontalStackView.addSubview(minLabel)
-        minLabel.itemLabel.text = "Min Temp: 27'' C "
         minLabel.itemLabel.font = UIFont.systemFont(ofSize: 14)
         minLabel.itemLabel.textAlignment = .right
 
         horizontalStackView.addSubview(maxLabel)
-        maxLabel.itemLabel.text = "Min Temp: 27'' C "
         maxLabel.itemLabel.font = UIFont.systemFont(ofSize: 14)
         maxLabel.itemLabel.textAlignment = .left
 
@@ -113,10 +113,23 @@ class WeatherViewController: UIViewController {
         horizontalStackView.addArrangedSubview(maxLabel)
 
         contentView.addSubview(itemWeatherTop)
+        self.itemWeatherTop.imageSatu.image = UIImage(systemName: "sunrise")
+        self.itemWeatherTop.nameLabelSatu.text = "Sunrise"
+        self.itemWeatherTop.imageDua.image = UIImage(systemName: "sunset")
+        self.itemWeatherTop.nameLabelDua.text = "Sunset"
+        self.itemWeatherTop.imageTiga.image = UIImage(systemName: "wind")
+        self.itemWeatherTop.nameLabelTiga.text = "Wind"
+        
         contentView.addSubview(itemWeatherBott)
+        self.itemWeatherBott.imageSatu.image = UIImage(systemName: "thermometer")
+        self.itemWeatherBott.nameLabelSatu.text = "Pressure"
+        self.itemWeatherBott.imageDua.image = UIImage(systemName: "humidity")
+        self.itemWeatherBott.nameLabelDua.text = "Humidity"
+        self.itemWeatherBott.imageTiga.image = UIImage(systemName: "info.circle")
+        self.itemWeatherBott.nameLabelTiga.text = "Created by"
+        self.itemWeatherBott.descLabelTiga.text = "Miftah"
 
     }
-    
     
     private func setConstraintView() {
         NSLayoutConstraint.activate([
@@ -168,6 +181,37 @@ class WeatherViewController: UIViewController {
             itemWeatherBott.height(90),
             
         ])
+    }
+    
+    private func setDataView() {
+        weatherViewModel.weatherModelObservable.subscribe(onNext: { (weather) in
+            self.cityLabel.itemLabel.text = weather?.name
+            self.weatherLabel.itemLabel.text = weather?.weather.first?.main
+            self.celciusLabel.itemLabel.text = String(format: "%.0f", (weather?.main.temp ?? 0.0) - 273.15) + "\u{00B0} C"
+            self.minLabel.itemLabel.text = "Min Temp: " + String(format: "%.0f", (weather?.main.tempMin ?? 0.0) - 273.15) + "\u{00B0} C"
+            self.maxLabel.itemLabel.text = "Max Temp: " + String(format: "%.0f", (weather?.main.tempMax ?? 0.0) - 273.15) + "\u{00B0} C"
+            self.updateLabel.itemLabel.text = "Update at: \(localTime(in: "\(weather?.timezone ?? 0)"))"
+            
+            
+            self.itemWeatherTop.descLabelSatu.text = "\(convertTime(timeInterval: weather?.sys.sunrise ?? 0) ?? "")"
+            self.itemWeatherTop.descLabelDua.text = "\(convertTime(timeInterval: weather?.sys.sunset ?? 0) ?? "")"
+            self.itemWeatherTop.descLabelTiga.text = "\(weather?.wind.speed ?? 0.0)"
+            
+            self.itemWeatherBott.descLabelSatu.text = "\(weather?.main.pressure ?? 0)"
+            self.itemWeatherBott.descLabelDua.text = "\(weather?.main.humidity ?? 0)"
+            
+        }, onError: { (onError) in
+            print(onError.localizedDescription)
+            
+        }, onCompleted: {
+            print("Completed")
+        })
+    }
+    
+    @objc private func refreshAction(sender: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            sender.endRefreshing()
+        })
     }
     
 }
