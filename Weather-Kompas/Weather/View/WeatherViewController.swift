@@ -7,6 +7,9 @@
 
 import UIKit
 import TinyConstraints
+import Network
+import RxSwift
+import CoreLocation
 
 class WeatherViewController: UIViewController {
     
@@ -56,12 +59,21 @@ class WeatherViewController: UIViewController {
     private var itemWeatherBott = ItemComponent()
     
     private let weatherViewModel = WeatherViewModel()
+    private let disposeBag = DisposeBag()
+    
+    private var weatherLokal: Weathers?
+    private var locationManager: CLLocationManager?
+    private var lat: String?
+    private var lon: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        weatherViewModel.getDataWeather()
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.startUpdatingLocation()
+        locationManager?.allowsBackgroundLocationUpdates = true
         
-        setDataView()
         setComponentView()
         setConstraintView()
     }
@@ -73,8 +85,9 @@ class WeatherViewController: UIViewController {
         gradientLayer.colors = [UIColor(named: "Color-1")?.cgColor, UIColor(named: "Color-2")?.cgColor]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
         
-        weatherViewModel.getDataWeather(lat: "2.962340", lon: "99.065988")
+        cekConnection()
     }
+    
     
     private func setComponentView() {
         //set scrollview to View dan contentView diatas layer scrollview
@@ -91,27 +104,27 @@ class WeatherViewController: UIViewController {
         contentView.addSubview(updateLabel)
         updateLabel.itemLabel.font = UIFont.systemFont(ofSize: 14)
         updateLabel.itemLabel.textAlignment = .center
-
+        
         contentView.addSubview(weatherLabel)
         weatherLabel.itemLabel.font = UIFont.systemFont(ofSize: 16)
         weatherLabel.itemLabel.textAlignment = .center
-
+        
         contentView.addSubview(celciusLabel)
         celciusLabel.itemLabel.font = UIFont.systemFont(ofSize: 54)
         celciusLabel.itemLabel.textAlignment = .center
-
+        
         contentView.addSubview(horizontalStackView)
         horizontalStackView.addSubview(minLabel)
         minLabel.itemLabel.font = UIFont.systemFont(ofSize: 14)
         minLabel.itemLabel.textAlignment = .right
-
+        
         horizontalStackView.addSubview(maxLabel)
         maxLabel.itemLabel.font = UIFont.systemFont(ofSize: 14)
         maxLabel.itemLabel.textAlignment = .left
-
+        
         horizontalStackView.addArrangedSubview(minLabel)
         horizontalStackView.addArrangedSubview(maxLabel)
-
+        
         contentView.addSubview(itemWeatherTop)
         self.itemWeatherTop.imageSatu.image = UIImage(systemName: "sunrise")
         self.itemWeatherTop.nameLabelSatu.text = "Sunrise"
@@ -128,7 +141,7 @@ class WeatherViewController: UIViewController {
         self.itemWeatherBott.imageTiga.image = UIImage(systemName: "info.circle")
         self.itemWeatherBott.nameLabelTiga.text = "Created by"
         self.itemWeatherBott.descLabelTiga.text = "Miftah"
-
+        
     }
     
     private func setConstraintView() {
@@ -147,7 +160,7 @@ class WeatherViewController: UIViewController {
             cityLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             cityLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cityLabel.height(25),
-             
+            
             
             updateLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: Constants.margin5),
             updateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -173,7 +186,7 @@ class WeatherViewController: UIViewController {
             itemWeatherTop.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.margin10),
             itemWeatherTop.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.margin10),
             itemWeatherTop.height(90),
-
+            
             itemWeatherBott.topAnchor.constraint(equalTo: itemWeatherTop.bottomAnchor, constant: Constants.margin10),
             itemWeatherBott.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.margin10),
             itemWeatherBott.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.margin10),
@@ -183,13 +196,39 @@ class WeatherViewController: UIViewController {
         ])
     }
     
+    private func cekConnection() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { (path) in
+            if path.usesInterfaceType(.cellular) || path.usesInterfaceType(.wifi) {
+                self.weatherViewModel.getDataWeather(lat: self.lat ?? "", lon: self.lon ?? "")
+                print(self.lat, self.lon, "lokasiii")
+                DispatchQueue.main.async {
+                    self.setDataView()
+                }
+            } else {
+                self.weatherLokal = CoreDataManager.shared.fetchWeather()
+                
+                if self.weatherLokal?.city_name == nil {
+                    alert(title: "Koneksi Internet!", message: "Periksa Koneksi internet anda untuk medapatkan data terbaru", vc: self)
+                }
+                
+                DispatchQueue.main.async {
+                    self.setDataViewLokal()
+                }
+            }
+        }
+        
+        let queue = DispatchQueue(label: "Network")
+        monitor.start(queue: queue)
+    }
+    
     private func setDataView() {
         weatherViewModel.weatherModelObservable.subscribe(onNext: { (weather) in
             self.cityLabel.itemLabel.text = weather?.name
             self.weatherLabel.itemLabel.text = weather?.weather.first?.main
-            self.celciusLabel.itemLabel.text = String(format: "%.0f", (weather?.main.temp ?? 0.0) - 273.15) + "\u{00B0} C"
-            self.minLabel.itemLabel.text = "Min Temp: " + String(format: "%.0f", (weather?.main.tempMin ?? 0.0) - 273.15) + "\u{00B0} C"
-            self.maxLabel.itemLabel.text = "Max Temp: " + String(format: "%.0f", (weather?.main.tempMax ?? 0.0) - 273.15) + "\u{00B0} C"
+            self.celciusLabel.itemLabel.text = String(format: "%.0f", (weather?.main.temp ?? 0.0) - 273.15) + "\u{00B0}C"
+            self.minLabel.itemLabel.text = "Min Temp: " + String(format: "%.0f", (weather?.main.tempMin ?? 0.0) - 273.15) + "\u{00B0}C"
+            self.maxLabel.itemLabel.text = "Max Temp: " + String(format: "%.0f", (weather?.main.tempMax ?? 0.0) - 273.15) + "\u{00B0}C"
             self.updateLabel.itemLabel.text = "Update at: \(localTime(in: "\(weather?.timezone ?? 0)"))"
             
             
@@ -200,18 +239,55 @@ class WeatherViewController: UIViewController {
             self.itemWeatherBott.descLabelSatu.text = "\(weather?.main.pressure ?? 0)"
             self.itemWeatherBott.descLabelDua.text = "\(weather?.main.humidity ?? 0)"
             
-        }, onError: { (onError) in
-            print(onError.localizedDescription)
+            CoreDataManager.shared.saveDataWeather(city: weather?.name ?? "",
+                                                   update: localTime(in: "\(weather?.timezone ?? 0)"),
+                                                   weather_cond: weather?.weather.first?.main ?? "",
+                                                   temperature: String(format: "%.0f", (weather?.main.temp ?? 0.0) - 273.15),
+                                                   min_tem: String(format: "%.0f", (weather?.main.tempMin ?? 0.0) - 273.15),
+                                                   max_temp: String(format: "%.0f", (weather?.main.tempMax ?? 0.0) - 273.15),
+                                                   sunrise: convertTime(timeInterval: weather?.sys.sunrise ?? 0) ?? "",
+                                                   sunset: convertTime(timeInterval: weather?.sys.sunset ?? 0) ?? "",
+                                                   wind: weather?.wind.speed ?? 0.0,
+                                                   pressure: weather?.main.pressure ?? 0,
+                                                   humidity: weather?.main.humidity ?? 0)
             
-        }, onCompleted: {
-            print("Completed")
-        })
+        }).disposed(by: disposeBag)
+    }
+    
+    private func setDataViewLokal() {
+        self.cityLabel.itemLabel.text = weatherLokal?.city_name
+        self.weatherLabel.itemLabel.text = weatherLokal?.weather_cond
+        self.celciusLabel.itemLabel.text = "\(weatherLokal?.temperature ?? "")" + "\u{00B0}C"
+        self.minLabel.itemLabel.text = "Min Temp: \(weatherLokal?.min_temp ?? "")" + "\u{00B0}C"
+        self.maxLabel.itemLabel.text = "Max Temp: \(weatherLokal?.max_temp ?? "")" + "\u{00B0}C"
+        self.updateLabel.itemLabel.text = "Update at: \(weatherLokal?.update_at ?? "")"
+        
+        self.itemWeatherTop.descLabelSatu.text = "\(weatherLokal?.sunrise ?? "")"
+        self.itemWeatherTop.descLabelDua.text = "\(weatherLokal?.sunset ?? "")"
+        self.itemWeatherTop.descLabelTiga.text = "\(weatherLokal?.wind ?? 0.0)"
+        
+        self.itemWeatherBott.descLabelSatu.text = "\(weatherLokal?.pressure ?? 0)"
+        self.itemWeatherBott.descLabelDua.text = "\(weatherLokal?.humidity ?? 0)"
+        
     }
     
     @objc private func refreshAction(sender: UIRefreshControl) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+            self.cekConnection()
             sender.endRefreshing()
         })
+    }
+}
+
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            lat = "\(location.coordinate.latitude)"
+            lon = "\(location.coordinate.longitude)"
+//            print(lat, lon, "lokasiii3333")
+        }
     }
     
 }

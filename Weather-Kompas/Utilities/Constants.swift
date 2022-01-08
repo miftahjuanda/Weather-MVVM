@@ -20,25 +20,3 @@ struct Constants {
 
 let urlWeather = "https://api.openweathermap.org/data/2.5/weather?"
 
-
-
-// converter timezone from API to UI
-func localTime(in timeZone: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-    dateFormatter.timeZone = TimeZone(identifier: timeZone)
-
-    return dateFormatter.string(from: Date())
-}
-
-//Converter time
-func convertTime(timeInterval: Int) -> String?{
-    let time = Double(timeInterval)
-    let sunriseDate = Date(timeIntervalSince1970: time)
-    let formatter = DateFormatter()
-    formatter.dateStyle = .none
-    formatter.timeStyle = .short
-    
-    let formattedTime = formatter.string(from: sunriseDate)
-    return formattedTime
-}

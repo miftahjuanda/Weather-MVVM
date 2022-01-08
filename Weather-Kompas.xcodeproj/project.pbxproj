@@ -21,6 +21,8 @@
 		B028D8F22786E032003915BC /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8F12786E032003915BC /* LabelComponent.swift */; };
 		B028D8F4278703F3003915BC /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8F3278703F3003915BC /* APIManager.swift */; };
 		B028D8F62787109C003915BC /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D8F52787109C003915BC /* ErrorModel.swift */; };
+		B028D90227893AAC003915BC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D90127893AAC003915BC /* CoreDataManager.swift */; };
+		B028D9042789525D003915BC /* ExtensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B028D9032789525D003915BC /* ExtensionUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		B028D8F12786E032003915BC /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
 		B028D8F3278703F3003915BC /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		B028D8F52787109C003915BC /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		B028D90127893AAC003915BC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B028D9032789525D003915BC /* ExtensionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUI.swift; sourceTree = "<group>"; };
 		E1AE0319569E8E7581ECF9DA /* Pods-Weather-Kompas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather-Kompas.debug.xcconfig"; path = "Target Support Files/Pods-Weather-Kompas/Pods-Weather-Kompas.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +89,7 @@
 		B028D8C72786D8E8003915BC /* Weather-Kompas */ = {
 			isa = PBXGroup;
 			children = (
+				B028D90027893A8A003915BC /* CoreDataManager */,
 				B028D8ED2786DB37003915BC /* APIManager */,
 				B028D8E12786DA89003915BC /* Weather */,
 				B028D8E02786DA60003915BC /* Utilities */,
@@ -111,6 +116,7 @@
 			children = (
 				B028D8EE2786DDB0003915BC /* Component */,
 				B028D8EB2786DB1B003915BC /* Constants.swift */,
+				B028D9032789525D003915BC /* ExtensionUI.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -165,6 +171,14 @@
 				B028D8F12786E032003915BC /* LabelComponent.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		B028D90027893A8A003915BC /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				B028D90127893AAC003915BC /* CoreDataManager.swift */,
+			);
+			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
 		E9EACBAC22A861260A60F092 /* Pods */ = {
@@ -291,11 +305,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B028D8F02786DDCE003915BC /* ItemComponent.swift in Sources */,
+				B028D9042789525D003915BC /* ExtensionUI.swift in Sources */,
 				B028D8E62786DAD1003915BC /* WeatherViewController.swift in Sources */,
 				B028D8F4278703F3003915BC /* APIManager.swift in Sources */,
 				B028D8F22786E032003915BC /* LabelComponent.swift in Sources */,
 				B028D8F62787109C003915BC /* ErrorModel.swift in Sources */,
 				B028D8D32786D8E8003915BC /* Weather_Kompas.xcdatamodeld in Sources */,
+				B028D90227893AAC003915BC /* CoreDataManager.swift in Sources */,
 				B028D8EC2786DB1B003915BC /* Constants.swift in Sources */,
 				B028D8EA2786DB04003915BC /* WeatherViewModel.swift in Sources */,
 				B028D8C92786D8E8003915BC /* AppDelegate.swift in Sources */,
@@ -369,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -424,7 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -445,10 +461,13 @@
 				DEVELOPMENT_TEAM = BTP3P5U2W5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Weather-Kompas/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Weather App Ingin menggunakan lokasi anda";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Weather App Ingin menggunakan lokasi anda";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -473,10 +492,13 @@
 				DEVELOPMENT_TEAM = BTP3P5U2W5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Weather-Kompas/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Weather App Ingin menggunakan lokasi anda";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Weather App Ingin menggunakan lokasi anda";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
