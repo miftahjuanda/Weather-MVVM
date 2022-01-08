@@ -76,6 +76,8 @@ class WeatherViewController: UIViewController {
         
         setComponentView()
         setConstraintView()
+        cekConnection()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,8 +86,6 @@ class WeatherViewController: UIViewController {
         gradientLayer.frame = self.view.bounds
         gradientLayer.colors = [UIColor(named: "Color-1")?.cgColor, UIColor(named: "Color-2")?.cgColor]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
-        
-        cekConnection()
     }
     
     
@@ -197,29 +197,33 @@ class WeatherViewController: UIViewController {
     }
     
     private func cekConnection() {
+        let coordinate = self.locationManager?.location?.coordinate
+        lat = String(Float(coordinate?.latitude ?? 0.0))
+        lon = String(Float(coordinate?.longitude ?? 0.0))
+        
         let monitor = NWPathMonitor()
+        let queue = DispatchQueue(label: "Network")
+        monitor.start(queue: queue)
+        
         monitor.pathUpdateHandler = { (path) in
             if path.usesInterfaceType(.cellular) || path.usesInterfaceType(.wifi) {
                 self.weatherViewModel.getDataWeather(lat: self.lat ?? "", lon: self.lon ?? "")
-                print(self.lat, self.lon, "lokasiii")
                 DispatchQueue.main.async {
                     self.setDataView()
                 }
             } else {
+                alert(title: "Koneksi Internet!", message: "Periksa Koneksi internet anda untuk medapatkan data terbaru", vc: self)
                 self.weatherLokal = CoreDataManager.shared.fetchWeather()
-                
-                if self.weatherLokal?.city_name == nil {
-                    alert(title: "Koneksi Internet!", message: "Periksa Koneksi internet anda untuk medapatkan data terbaru", vc: self)
-                }
                 
                 DispatchQueue.main.async {
                     self.setDataViewLokal()
                 }
+                
+                if self.weatherLokal?.city_name == nil {
+                    alert(title: "Tidak Ditemukan Internet!", message: "Internet tidak tersedia, data weather tidak dapat ditampilkan", vc: self)
+                }
             }
         }
-        
-        let queue = DispatchQueue(label: "Network")
-        monitor.start(queue: queue)
     }
     
     private func setDataView() {
@@ -240,16 +244,16 @@ class WeatherViewController: UIViewController {
             self.itemWeatherBott.descLabelDua.text = "\(weather?.main.humidity ?? 0)"
             
             CoreDataManager.shared.saveDataWeather(city: weather?.name ?? "",
-                                                   update: localTime(in: "\(weather?.timezone ?? 0)"),
-                                                   weather_cond: weather?.weather.first?.main ?? "",
-                                                   temperature: String(format: "%.0f", (weather?.main.temp ?? 0.0) - 273.15),
-                                                   min_tem: String(format: "%.0f", (weather?.main.tempMin ?? 0.0) - 273.15),
-                                                   max_temp: String(format: "%.0f", (weather?.main.tempMax ?? 0.0) - 273.15),
-                                                   sunrise: convertTime(timeInterval: weather?.sys.sunrise ?? 0) ?? "",
-                                                   sunset: convertTime(timeInterval: weather?.sys.sunset ?? 0) ?? "",
-                                                   wind: weather?.wind.speed ?? 0.0,
-                                                   pressure: weather?.main.pressure ?? 0,
-                                                   humidity: weather?.main.humidity ?? 0)
+                                     update: localTime(in: "\(weather?.timezone ?? 0)"),
+                                     weather_cond: weather?.weather.first?.main ?? "",
+                                     temperature: String(format: "%.0f", (weather?.main.temp ?? 0.0) - 273.15),
+                                     min_tem: String(format: "%.0f", (weather?.main.tempMin ?? 0.0) - 273.15),
+                                     max_temp: String(format: "%.0f", (weather?.main.tempMax ?? 0.0) - 273.15),
+                                     sunrise: convertTime(timeInterval: weather?.sys.sunrise ?? 0) ?? "",
+                                     sunset: convertTime(timeInterval: weather?.sys.sunset ?? 0) ?? "",
+                                     wind: weather?.wind.speed ?? 0.0,
+                                     pressure: weather?.main.pressure ?? 0,
+                                     humidity: weather?.main.humidity ?? 0)
             
         }).disposed(by: disposeBag)
     }
@@ -273,7 +277,7 @@ class WeatherViewController: UIViewController {
     
     @objc private func refreshAction(sender: UIRefreshControl) {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3, execute: {
             self.cekConnection()
             sender.endRefreshing()
         })
@@ -286,7 +290,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             lat = "\(location.coordinate.latitude)"
             lon = "\(location.coordinate.longitude)"
-//            print(lat, lon, "lokasiii3333")
         }
     }
     

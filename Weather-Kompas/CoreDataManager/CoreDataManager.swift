@@ -57,7 +57,6 @@ class CoreDataManager {
         return weather
     }
     
-    
     // MARK: - Saved
     func save (onSuccess: @escaping () -> Void) {
         let context = persistentContainer.viewContext
